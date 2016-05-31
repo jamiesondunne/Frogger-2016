@@ -2,9 +2,15 @@ import java.awt.Color;
 import java.awt.Graphics;
 public class Frogger_DP
 {
+	public static final int X = 0;
+	public static final int Y = 65;
+	public static final int WIDTH = 400;
+	public static final int HEIGHT = 600;
+	public static final int START = 1;
+	public static final int END = 5;
 	public static void main(String[] args) 
 	{
-		DrawingPanel panel = new DrawingPanel(400, 600);
+		DrawingPanel panel = new DrawingPanel(WIDTH, HEIGHT);
 		Graphics g = panel.getGraphics();
 		gameboard(panel, g);
 		cars(panel, g);
@@ -12,36 +18,42 @@ public class Frogger_DP
 	//This method creates the frogger gameboard
 	public static void gameboard(DrawingPanel panel, Graphics g) 
 	{
-		Color black = new Color(0, 0, 0);
-		panel.setBackground(black);
-		Color blue = new Color(0, 0, 255);
-		g.setColor(blue);
-		g.drawLine(0, 540, 400, 540);
-		Color green = new Color(0, 255, 0);
-		Color yellow = new Color(255, 255, 0);
-		g.setColor(yellow);
+		panel.setBackground(Color.BLACK);
+		g.setColor(Color.BLUE);
+		g.drawLine(X, HEIGHT - HEIGHT/10, WIDTH, HEIGHT - 60);
+		g.setColor(Color.YELLOW);
 		for (int i = 0; i <= 16; i+=2) 
 		{
-			g.fillRect(20 * 2*i, 415, 50, 50);
+			g.fillRect(WIDTH/10*i, WIDTH + HEIGHT/40, WIDTH/8, HEIGHT/12);
 		}
-		g.setColor(green);
-		g.drawRect(0, 290, 400, 60);
-		g.setColor(yellow);
+		g.setColor(Color.GREEN);
+		//this is wrong
+		g.drawRect(X, Y * 3, WIDTH, HEIGHT/10);
+		g.setColor(Color.YELLOW);
 		for (int i = 0; i <= 16; i+=2) 
 		{
-			g.fillRect(20 * 2*i, 150, 50, 50);
+			g.fillRect(WIDTH/10*i, Y * 2, WIDTH/8, HEIGHT/12);
 		}
-		g.setColor(green);
-		g.drawLine(0, 65, 400, 65);
+		g.setColor(Color.GREEN);
+		g.drawLine(X, Y, WIDTH, Y);
 	}
 	//This method creates and controls the movement of the cars on the gameboard
 	public static void cars(DrawingPanel panel, Graphics g) 
 	{
 	
 		g.setColor(Color.RED);
-		for (int i = 1; i <=5; i+=2) 
+		for (int i = START; i <=END; i+=2) 
 		{
 			g.drawRect(50 * i, 500, 50, 25);
 		}
+		for (int i = START; i <=END; i+=2) 
+		{
+			g.drawRect(50 * i, 250, 50, 25);
+		}
+		for (int i = START; i <=END; i+=2) 
+		{
+			g.drawRect(50 * i, 50, 50, 25);
+		}
+		
 	}
 }
