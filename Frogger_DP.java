@@ -1,12 +1,17 @@
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 public class Frogger_DP
 {
 	public static void main(String[] args) 
 	{
 		DrawingPanel panel = new DrawingPanel(400, 600);
 		Graphics g = panel.getGraphics();
+		gameboard(panel, g);
+		cars(panel, g);
+	}
+	//This method creates the frogger gameboard
+	public static void gameboard(DrawingPanel panel, Graphics g) 
+	{
 		Color black = new Color(0, 0, 0);
 		panel.setBackground(black);
 		Color blue = new Color(0, 0, 255);
@@ -28,5 +33,15 @@ public class Frogger_DP
 		}
 		g.setColor(green);
 		g.drawLine(0, 65, 400, 65);
+	}
+	//This method creates and controls the movement of the cars on the gameboard
+	public static void cars(DrawingPanel panel, Graphics g) 
+	{
+	
+		g.setColor(Color.RED);
+		for (int i = 1; i <=5; i+=2) 
+		{
+			g.drawRect(50 * i, 500, 50, 25);
+		}
 	}
 }
