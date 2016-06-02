@@ -13,9 +13,18 @@ public class Frogger_DP
 	{
 		DrawingPanel panel = new DrawingPanel(WIDTH, HEIGHT);
 		Graphics g = panel.getGraphics();
+		ArrayList<String> moves = new ArrayList<String>();
+		String response = ""; 
+		while (!response.toLowerCase().equals("stop") 
+		{
+			System.out.print("Welcome to Frogger - with a twist! Type your list of moves here, w is up, a is back, d is right, and s is left. Good luck!")
+			System.out.println("Your move? (\"stop\" when you're done)");
+			response = conole.nextLine();
+			moves.add(response.toLowerCase());
+		}
 		gameboard(panel, g);
 		cars(panel, g);
-		frog(panel, g);
+		game(panel, g, moves);
 	}
 	//This method creates the frogger gameboard
 	public static void gameboard(DrawingPanel panel, Graphics g) 
@@ -61,10 +70,65 @@ public class Frogger_DP
 			g.drawRect(SIZE * i, SIZE * 2, SIZE, SIZE/2);
 		}
 	}
-	//This method creates the frog
-	public static void frog(DrawingPanel panel, Graphics g) 
+	//This method creates the frog and runs the game
+	public static void game(DrawingPanel panel, Graphics g, ArrayList<String> list) 
 	{
+		int x = 150;
+		int y = 550;
+		int count = 0;
 		g.setColor(Color.GREEN);
-		g.drawOval(150, 550, SIZE, SIZE);
+		g.drawOval(x, y, SIZE, SIZE);
+		for(int i = 0; i < list.size(); i++) 
+		{
+			if (moves.get(i).equals("w")) 
+			{
+				y += 50
+				g.drawOval(x, y, SIZE, SIZE);
+				if (distance(x, y, 50, 500) == 0 || distance(x, y, 150, 500) == 0 || distance(x, y, 250, 500) 
+				{
+					System.out.println("ooh, you lost! you made it " + count + " moves.");
+					break;
+				}
+				count++;
+			}
+			if (moves.get(i).equals("a")) 
+			{
+				x -= 50
+				g.drawOval(x, y, SIZE, SIZE);
+				if (distance(x, y, 50, 500) == 0 || distance(x, y, 150, 500) == 0 || distance(x, y, 250, 500) 
+				{
+					System.out.println("ooh, you lost! you made it " + count + " moves.");
+					break;
+				}
+				count++;
+			}
+			if (moves.get(i).equals("s")) 
+			{
+				y -= 50
+				g.drawOval(x, y, SIZE, SIZE);
+				if (distance(x, y, 50, 500) == 0 || distance(x, y, 150, 500) == 0 || distance(x, y, 250, 500) 
+				{
+					System.out.println("ooh, you lost! you made it " + count + " moves.");
+					break;
+				}
+				count++;
+			}
+			if (moves.get(i).equals("d")) 
+			{
+				x += 50
+				g.drawOval(x, y, SIZE, SIZE);
+				if (distance(x, y, 50, 500) == 0 || distance(x, y, 150, 500) == 0 || distance(x, y, 250, 500) 
+				{
+					System.out.println("ooh, you lost! you made it " + count + " moves.");
+					break;
+				}
+				count++;
+			}
+			
+		}
+	}
+	public static int distance (int x1, int y1, int x2, int y2) 
+	{
+		return math.sqrt((x2 - x1) + (y2 - y1));
 	}
 }
